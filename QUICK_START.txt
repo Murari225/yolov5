@@ -1,0 +1,130 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                  YOLOv5 OBJECT DETECTION - READY TO USE                  ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+✅ SYSTEM STATUS: FULLY OPERATIONAL
+
+Environment:
+  • Python: 3.12.10
+  • PyTorch: 2.7.1 (CPU)
+  • Ultralytics: 8.3.151
+  • OpenCV: 4.11.0.86
+  • All dependencies: INSTALLED ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 QUICK START COMMANDS
+
+1. RUN SIMPLE DEMO (Recommended First)
+   python demo_simple.py
+
+   ✓ Just ran successfully!
+   ✓ Detected: 4 persons + 1 bus in bus.jpg
+   ✓ Detected: 2 persons + 2 ties in zidane.jpg
+
+2. DETECT ON IMAGES
+   python detect.py --weights yolov5s.pt --source data/images/bus.jpg
+
+3. WEBCAM DETECTION (Real-time)
+   python cam_detect.py
+   (Press 'q' to quit)
+
+4. WEBCAM WITH LOGGING
+   python cam_detect_save.py
+   (Saves detections to detected_objects_log.txt)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📁 AVAILABLE SCRIPTS
+
+✓ detect.py              - Main detection script (images/videos/webcam)
+✓ demo_simple.py         - Simple demo with results display
+✓ cam_detect.py          - Basic webcam detection
+✓ cam_detect_save.py     - Webcam detection with logging
+✓ yolo_cam.py            - Alternative webcam script
+✓ train.py               - Train custom models
+✓ val.py                 - Validate models
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎨 DETECTION OPTIONS
+
+Different Sources:
+  • Image:     --source data/images/bus.jpg
+  • Folder:    --source data/images/
+  • Video:     --source video.mp4
+  • Webcam:    --source 0
+  • URL:       --source https://example.com/image.jpg
+
+Different Models (speed vs accuracy):
+  • yolov5n.pt  - Nano (fastest)
+  • yolov5s.pt  - Small (balanced) ⭐ Default
+  • yolov5m.pt  - Medium
+  • yolov5l.pt  - Large
+  • yolov5x.pt  - Extra Large (most accurate)
+  • yolov8n.pt  - YOLOv8 Nano (available)
+
+Useful Flags:
+  • --conf 0.5        - Confidence threshold (0-1)
+  • --view-img        - Display results
+  • --save-txt        - Save detection labels
+  • --save-crop       - Save cropped detections
+  • --hide-labels     - Hide labels on images
+  • --hide-conf       - Hide confidence scores
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 TEST RESULTS (Just Completed)
+
+Test 1: Bus Image Detection
+  ✓ Status: SUCCESS
+  ✓ Objects: 4 persons, 1 bus
+  ✓ Inference: 289ms
+  ✓ Results: runs/detect/exp/
+
+Test 2: Multiple Images
+  ✓ Status: SUCCESS
+  ✓ Images: bus.jpg, zidane.jpg
+  ✓ Total detections: 9 objects
+  ✓ Results: runs/detect/exp3/
+
+Test 3: Demo Script
+  ✓ Status: SUCCESS
+  ✓ Model: YOLOv5s loaded
+  ✓ Detections: All objects found correctly
+  ✓ Results: runs/detect/demo/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 EXAMPLES
+
+Example 1: Detect with high confidence
+  python detect.py --weights yolov5s.pt --source data/images/ --conf 0.7
+
+Example 2: Webcam with lower confidence (more detections)
+  python detect.py --weights yolov5s.pt --source 0 --conf 0.3
+
+Example 3: Save crops of detected objects
+  python detect.py --weights yolov5s.pt --source data/images/bus.jpg --save-crop
+
+Example 4: Detect only specific classes (e.g., person and car)
+  python detect.py --weights yolov5s.pt --source 0 --classes 0 2
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 DOCUMENTATION
+
+• Full Guide:     RUN_DEMO.md
+• YOLOv5 Docs:    https://docs.ultralytics.com/yolov5/
+• Training Guide: https://docs.ultralytics.com/yolov5/tutorials/train_custom_data/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 READY TO GO! Pick any command above and start detecting objects!
+
+For webcam detection, make sure your camera is connected and not in use by
+another application.
+
+Results are automatically saved to: runs/detect/exp*/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

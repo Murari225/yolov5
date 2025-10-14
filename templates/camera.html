@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Camera Detection - YOLOv5</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_premium.css') }}">
+    <style>
+        .camera-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+
+        #videoElement {
+            width: 100%;
+            display: block;
+            border-radius: 1.5rem;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .camera-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .live-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .live-stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .live-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .live-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0ba360;
+            box-shadow: 0 0 10px #0ba360;
+            animation: pulse-status 2s infinite;
+        }
+
+        @keyframes pulse-status {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+                box-shadow: 0 0 10px #0ba360;
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.3);
+                box-shadow: 0 0 20px #0ba360;
+            }
+        }
+
+        .status-dot.inactive {
+            background: #fa709a;
+            box-shadow: 0 0 10px #fa709a;
+            animation: none;
+        }
+
+        .detection-overlay {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(75, 172, 254, 0.2));
+            backdrop-filter: blur(15px);
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 2px solid rgba(0, 242, 254, 0.3);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="60" height="60" rx="15" fill="url(#grad1)"/>
+                    <circle cx="20" cy="20" r="4" fill="white" opacity="0.95"/>
+                    <circle cx="40" cy="20" r="4" fill="white" opacity="0.95"/>
+                    <circle cx="30" cy="35" r="4" fill="white" opacity="0.95"/>
+                    <path d="M15 15 L25 25 L35 15 M25 25 L25 40" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+                </svg>
+                <h1>Live Camera Detection</h1>
+            </div>
+            <p class="subtitle">📹 Real-Time Object Detection • AI-Powered Live Analysis</p>
+        </header>
+
+        <!-- Navigation -->
+        <div class="nav-links">
+            <a href="/" class="nav-link">📤 Upload Files</a>
+            <a href="/camera" class="nav-link active">📹 Live Camera</a>
+        </div>
+
+        <!-- Status -->
+        <div style="text-align: center;">
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Camera Inactive</span>
+            </div>
+        </div>
+
+        <!-- Live Stats -->
+        <div class="live-stats" id="liveStats">
+            <div class="live-stat-card">
+                <div class="live-stat-value" id="fpsValue">0</div>
+                <div class="live-stat-label">FPS</div>
+            </div>
+            <div class="live-stat-card">
+                <div class="live-stat-value" id="objectsValue">0</div>
+                <div class="live-stat-label">Objects Detected</div>
+            </div>
+            <div class="live-stat-card">
+                <div class="live-stat-value" id="classesValue">0</div>
+                <div class="live-stat-label">Unique Classes</div>
+            </div>
+        </div>
+
+        <!-- Camera Feed -->
+        <div class="result-media">
+            <div class="camera-container">
+                <video id="videoElement" autoplay playsinline></video>
+                <canvas id="canvas"></canvas>
+                <div class="detection-overlay" id="detectionOverlay" style="display: none;">
+                    <div id="detectionList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="camera-controls">
+            <button class="btn btn-primary" id="startBtn" onclick="startCamera()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                    <polygon points="10 8 16 12 10 16" fill="currentColor"/>
+                </svg>
+                🎥 Start Camera
+            </button>
+            <button class="btn btn-secondary" id="stopBtn" onclick="stopCamera()" style="display: none;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                    <rect x="9" y="9" width="6" height="6" fill="currentColor"/>
+                </svg>
+                ⏹️ Stop Camera
+            </button>
+            <button class="btn btn-secondary" id="captureBtn" onclick="captureFrame()" style="display: none;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                📸 Capture Frame
+            </button>
+        </div>
+
+        <!-- Detection Details -->
+        <div class="detection-details" id="detectionDetails" style="display: none;">
+            <h3>🎯 Currently Detected Objects</h3>
+            <div class="object-list" id="currentObjects">
+                <p style="color: var(--text-secondary); text-align: center;">No objects detected yet</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>⚡ Powered by YOLOv5 • Real-Time Detection • 🚀 AI-Driven Analysis</p>
+        </footer>
+    </div>
+
+    <script>
+        let video = document.getElementById('videoElement');
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        let stream = null;
+        let detectionInterval = null;
+        let frameCount = 0;
+        let lastTime = Date.now();
+
+        async function startCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    } 
+                });
+                
+                video.srcObject = stream;
+                
+                // Update UI
+                document.getElementById('startBtn').style.display = 'none';
+                document.getElementById('stopBtn').style.display = 'inline-flex';
+                document.getElementById('captureBtn').style.display = 'inline-flex';
+                document.getElementById('statusDot').classList.remove('inactive');
+                document.getElementById('statusText').textContent = 'Camera Active';
+                document.getElementById('detectionDetails').style.display = 'block';
+                
+                // Wait for video to load
+                video.onloadedmetadata = () => {
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    
+                    // Start detection
+                    startDetection();
+                };
+                
+            } catch (err) {
+                console.error('Error accessing camera:', err);
+                alert('Could not access camera. Please ensure camera permissions are granted.');
+            }
+        }
+
+        function stopCamera() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+            
+            if (detectionInterval) {
+                clearInterval(detectionInterval);
+                detectionInterval = null;
+            }
+            
+            // Update UI
+            document.getElementById('startBtn').style.display = 'inline-flex';
+            document.getElementById('stopBtn').style.display = 'none';
+            document.getElementById('captureBtn').style.display = 'none';
+            document.getElementById('statusDot').classList.add('inactive');
+            document.getElementById('statusText').textContent = 'Camera Inactive';
+            document.getElementById('detectionOverlay').style.display = 'none';
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function startDetection() {
+            detectionInterval = setInterval(async () => {
+                await detectFrame();
+                updateFPS();
+            }, 500); // Detect every 500ms (2 FPS for detection)
+        }
+
+        async function detectFrame() {
+            if (!video.videoWidth) return;
+            
+            // Draw current frame to canvas
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+            
+            // Get image data
+            const imageData = canvas.toDataURL('image/jpeg', 0.8);
+            
+            try {
+                // Send to server for detection
+                const response = await fetch('/detect_frame', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ image: imageData })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    drawDetections(result.detections);
+                    updateStats(result.detections);
+                }
+                
+            } catch (error) {
+                console.error('Detection error:', error);
+            }
+        }
+
+        function drawDetections(detections) {
+            // Clear previous drawings
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (!detections || detections.length === 0) {
+                document.getElementById('detectionOverlay').style.display = 'none';
+                return;
+            }
+            
+            // Count objects by type
+            const objectCounts = {};
+            detections.forEach(det => {
+                objectCounts[det.name] = (objectCounts[det.name] || 0) + 1;
+            });
+            
+            // Track count per object type for numbering
+            const currentCounts = {};
+            
+            detections.forEach((det, index) => {
+                const [x1, y1, x2, y2] = [det.xmin, det.ymin, det.xmax, det.ymax];
+                const label = det.name;
+                const conf = det.confidence.toFixed(2);
+                
+                // Increment count for this object type
+                currentCounts[label] = (currentCounts[label] || 0) + 1;
+                const objectNumber = currentCounts[label];
+                
+                // Assign colors based on object type
+                const colorMap = {
+                    'person': '#00f2fe',
+                    'car': '#fa709a',
+                    'truck': '#fee140',
+                    'bus': '#0ba360',
+                    'motorcycle': '#f093fb',
+                    'bicycle': '#ff6b6b',
+                    'dog': '#4ecdc4',
+                    'cat': '#ffe66d',
+                    'default': '#00f2fe'
+                };
+                const color = colorMap[label] || colorMap['default'];
+                
+                // Draw main bounding box
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+                
+                // Create label text in format: "object_name - number - (confidence)"
+                const labelText = `${label} - ${objectNumber} - (${conf})`;
+                
+                // Measure text
+                ctx.font = 'bold 16px Arial, sans-serif';
+                const textMetrics = ctx.measureText(labelText);
+                const textWidth = textMetrics.width;
+                const textHeight = 20;
+                const padding = 6;
+                
+                // Draw label background (solid color)
+                ctx.fillStyle = color;
+                const labelY = y1 - textHeight - padding;
+                ctx.fillRect(x1, labelY, textWidth + padding * 2, textHeight + padding);
+                
+                // Draw label text
+                ctx.fillStyle = 'white';
+                ctx.textBaseline = 'top';
+                ctx.fillText(labelText, x1 + padding, labelY + padding / 2);
+            });
+            
+            // Update overlay
+            updateOverlay(objectCounts);
+        }
+
+        function updateOverlay(objectCounts) {
+            const overlay = document.getElementById('detectionOverlay');
+            const list = document.getElementById('detectionList');
+            
+            if (Object.keys(objectCounts).length === 0) {
+                overlay.style.display = 'none';
+                return;
+            }
+            
+            overlay.style.display = 'block';
+            
+            let html = '<strong>Detected:</strong> ';
+            const items = Object.entries(objectCounts).map(([name, count]) => 
+                `${count}x ${name}`
+            );
+            html += items.join(', ');
+            
+            list.innerHTML = html;
+        }
+
+        function updateStats(detections) {
+            const objectCounts = {};
+            
+            if (detections) {
+                detections.forEach(det => {
+                    objectCounts[det.name] = (objectCounts[det.name] || 0) + 1;
+                });
+            }
+            
+            // Update stats
+            document.getElementById('objectsValue').textContent = detections ? detections.length : 0;
+            document.getElementById('classesValue').textContent = Object.keys(objectCounts).length;
+            
+            // Update current objects list
+            updateCurrentObjects(objectCounts);
+        }
+
+        function updateCurrentObjects(objectCounts) {
+            const container = document.getElementById('currentObjects');
+            
+            if (Object.keys(objectCounts).length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No objects detected</p>';
+                return;
+            }
+            
+            let html = '';
+            Object.entries(objectCounts).sort((a, b) => b[1] - a[1]).forEach(([name, count], index) => {
+                html += `
+                    <div class="object-item" style="--item-index: ${index}">
+                        <span class="object-name">${name}</span>
+                        <span class="object-count">${count}</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function updateFPS() {
+            frameCount++;
+            const now = Date.now();
+            const elapsed = (now - lastTime) / 1000;
+            
+            if (elapsed >= 1) {
+                const fps = Math.round(frameCount / elapsed);
+                document.getElementById('fpsValue').textContent = fps;
+                frameCount = 0;
+                lastTime = now;
+            }
+        }
+
+        function captureFrame() {
+            const link = document.createElement('a');
+            link.download = `detection_${Date.now()}.jpg`;
+            link.href = canvas.toDataURL('image/jpeg');
+            link.click();
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            stopCamera();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLOv5 Object Detection - AI Powered</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_premium.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4facfe;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="60" height="60" rx="15" fill="url(#grad1)"/>
+                    <circle cx="20" cy="20" r="4" fill="white" opacity="0.95"/>
+                    <circle cx="40" cy="20" r="4" fill="white" opacity="0.95"/>
+                    <circle cx="30" cy="35" r="4" fill="white" opacity="0.95"/>
+                    <path d="M15 15 L25 25 L35 15 M25 25 L25 40" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+                </svg>
+                <h1>YOLOv5 Object Detection</h1>
+            </div>
+            <p class="subtitle">✨ AI-Powered Real-Time Object Detection • Upload & Analyze Instantly</p>
+        </header>
+
+        <!-- Navigation -->
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
+            <a href="/" style="padding: 0.75rem 1.5rem; background: var(--primary-gradient); border-radius: 0.75rem; color: white; text-decoration: none; font-weight: 600;">📤 Upload Files</a>
+            <a href="/camera" style="padding: 0.75rem 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 0.75rem; color: var(--text-primary); text-decoration: none; font-weight: 600; transition: all 0.3s ease;">📹 Live Camera</a>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <div class="upload-box" id="uploadBox">
+                <svg class="upload-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                <h2>🎯 Drop your file here</h2>
+                <p>or click to browse from your device</p>
+                <p class="file-types">📸 Images: JPG, PNG, GIF • 🎥 Videos: MP4, AVI, MOV • Max 100MB</p>
+                <input type="file" id="fileInput" accept="image/*,video/*" hidden>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">🔄 Processing with AI...</p>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <h2>🎉 Detection Results</h2>
+            
+            <!-- Statistics -->
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be inserted here -->
+            </div>
+
+            <!-- Detected Media -->
+            <div class="result-media" id="resultMedia">
+                <!-- Image or video will be inserted here -->
+            </div>
+
+            <!-- Detection Details -->
+            <div class="detection-details" id="detectionDetails">
+                <!-- Details will be inserted here -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="resetUpload()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                    </svg>
+                    🔄 Upload Another
+                </button>
+                <button class="btn btn-primary" id="downloadBtn" onclick="downloadResult()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    💾 Download Result
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>⚡ Powered by YOLOv5 • Built with Flask & PyTorch • 🚀 AI-Driven Detection</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
