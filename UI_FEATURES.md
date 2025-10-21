@@ -9,12 +9,14 @@ Your YOLOv5 web application now features a **premium, modern, and highly creativ
 ## 🌟 Visual Features
 
 ### 1. **Dark Theme with Gradient Accents**
+
 - Deep dark background (#0a0a1f) for reduced eye strain
 - Purple-to-violet gradient accents (#667eea → #764ba2)
 - Animated starfield background with subtle sparkles
 - Radial gradient overlays for depth
 
 ### 2. **Glassmorphism Effects**
+
 - Frosted glass cards with backdrop blur
 - Semi-transparent backgrounds
 - Subtle borders with rgba colors
@@ -23,29 +25,34 @@ Your YOLOv5 web application now features a **premium, modern, and highly creativ
 ### 3. **Advanced Animations**
 
 #### **Page Load**
+
 - Fade-in-down header animation
 - Staggered fade-in-up for sections
 - Smooth entrance transitions
 
 #### **Interactive Elements**
+
 - Floating upload icon (3s loop)
 - Rotating gradient border on hover
 - Pulsing glow effects on logo
 - Sliding shimmer on progress bars
 
 #### **Results Display**
+
 - Scale-in animation for media
 - Slide-in-left for object items (staggered)
 - Pop-in animation for count badges
 - Pulsing dots on object names
 
 ### 4. **Hover Effects**
+
 - **Upload Box**: Lifts up, scales, glows with rotating gradient
 - **Stat Cards**: Elevates with gradient overlay
 - **Object Items**: Slides right with border glow
 - **Buttons**: Ripple effect with expanding circle
 
 ### 5. **Color Gradients**
+
 ```css
 Primary: #667eea → #764ba2 (Purple)
 Secondary: #f093fb → #f5576c (Pink-Red)
@@ -53,6 +60,7 @@ Success: #4facfe → #00f2fe (Blue-Cyan)
 ```
 
 ### 6. **Typography**
+
 - **Font**: Inter (Google Fonts) - Modern, clean
 - **Gradient Text**: Titles use gradient fill
 - **Weights**: 300 (Light), 600 (Semi-bold), 700 (Bold), 800 (Extra-bold)
@@ -63,6 +71,7 @@ Success: #4facfe → #00f2fe (Blue-Cyan)
 ## 🎯 UX Enhancements
 
 ### 1. **Upload Experience**
+
 - Large, inviting drop zone
 - Clear visual feedback on drag-over
 - Animated upload icon
@@ -70,21 +79,24 @@ Success: #4facfe → #00f2fe (Blue-Cyan)
 - Smooth transitions
 
 ### 2. **Progress Feedback**
+
 - Animated gradient progress bar
 - Sliding shimmer effect
 - Clear status messages with emojis
 - Smooth width transitions
 
 ### 3. **Results Presentation**
+
 - **Statistics**: Large, gradient numbers in cards
 - **Media Display**: Centered with shadow and border
-- **Object List**: 
+- **Object List**:
   - Pulsing colored dots
   - Gradient count badges
   - Hover slide animation
   - Staggered entrance
 
 ### 4. **Responsive Design**
+
 - Mobile-optimized layouts
 - Touch-friendly buttons
 - Adaptive grid columns
@@ -95,6 +107,7 @@ Success: #4facfe → #00f2fe (Blue-Cyan)
 ## 🎨 Key Design Patterns
 
 ### **Micro-interactions**
+
 1. Button ripple effects
 2. Card lift on hover
 3. Icon floating animation
@@ -102,12 +115,14 @@ Success: #4facfe → #00f2fe (Blue-Cyan)
 5. Progress shimmer
 
 ### **Visual Hierarchy**
+
 1. Large gradient headings
 2. Clear section separation
 3. Consistent spacing (2rem, 3rem, 4rem)
 4. Prominent CTAs
 
 ### **Depth & Layering**
+
 1. Multiple shadow levels
 2. Backdrop blur (glassmorphism)
 3. Overlapping gradients
@@ -149,26 +164,31 @@ Tablet/Mobile: ≤ 768px
 ## ✨ Unique Features
 
 ### 1. **Animated Background**
+
 - Subtle particle effect
 - Slow-moving sparkles
 - Non-intrusive depth
 
 ### 2. **Rotating Gradient Border**
+
 - Conic gradient animation
 - 8-second rotation
 - Appears on hover
 
 ### 3. **Staggered Animations**
+
 - Object items animate in sequence
 - Uses CSS custom properties (--item-index)
 - Creates flowing entrance
 
 ### 4. **Gradient Text**
+
 - Webkit background-clip
 - Transparent text fill
 - Smooth gradient transitions
 
 ### 5. **Glassmorphism Cards**
+
 - Backdrop blur: 20px
 - Semi-transparent backgrounds
 - Subtle borders
@@ -179,31 +199,35 @@ Tablet/Mobile: ≤ 768px
 ## 🔧 Customization Guide
 
 ### Change Primary Color
+
 ```css
 :root {
-    --primary-gradient: linear-gradient(135deg, #YOUR_COLOR1, #YOUR_COLOR2);
-    --primary-color: #YOUR_COLOR1;
+  --primary-gradient: linear-gradient(135deg, #YOUR_COLOR1, #YOUR_COLOR2);
+  --primary-color: #YOUR_COLOR1;
 }
 ```
 
 ### Adjust Animation Speed
+
 ```css
 .upload-icon {
-    animation: float 3s ease-in-out infinite; /* Change 3s */
+  animation: float 3s ease-in-out infinite; /* Change 3s */
 }
 ```
 
 ### Modify Blur Intensity
+
 ```css
 .upload-box {
-    backdrop-filter: blur(20px); /* Change 20px */
+  backdrop-filter: blur(20px); /* Change 20px */
 }
 ```
 
 ### Change Background
+
 ```css
 body {
-    background: #YOUR_COLOR;
+  background: #YOUR_COLOR;
 }
 ```
 
@@ -222,6 +246,7 @@ body {
 ## 💡 Design Inspiration
 
 This UI combines elements from:
+
 - **Glassmorphism** (Apple, iOS)
 - **Neumorphism** (Soft shadows)
 - **Gradient Design** (Instagram, Stripe)
@@ -233,12 +258,14 @@ This UI combines elements from:
 ## 📊 Before & After
 
 ### Before (Original)
+
 - Light theme
 - Simple flat design
 - Basic hover effects
 - Standard colors
 
 ### After (Premium)
+
 - ✅ Dark theme with gradients
 - ✅ Glassmorphism effects
 - ✅ Advanced animations
@@ -253,6 +280,7 @@ This UI combines elements from:
 ## 🎉 Result
 
 A **stunning, modern, professional-grade** web application that:
+
 - Captures attention immediately
 - Provides delightful interactions
 - Feels premium and polished
