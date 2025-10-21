@@ -1,6 +1,7 @@
 # YOLOv5 Object Detection - Quick Start Guide
 
 ## ✅ Environment Status
+
 - **Python Version**: 3.12.10
 - **PyTorch**: 2.7.1 (CPU)
 - **Ultralytics**: 8.3.151
@@ -31,22 +32,27 @@ Results are saved to: `runs/detect/exp/`
 You have 3 webcam detection scripts available:
 
 #### Option A: Simple Webcam Detection
+
 ```bash
 python yolo_cam.py
 ```
 
 #### Option B: Basic Webcam Detection
+
 ```bash
 python cam_detect.py
 ```
 
 #### Option C: Webcam Detection with Logging
+
 ```bash
 python cam_detect_save.py
 ```
+
 This saves detected objects to `detected_objects_log.txt`
 
 #### Option D: Using detect.py with webcam
+
 ```bash
 python detect.py --weights yolov5s.pt --source 0 --conf 0.5
 ```
@@ -80,6 +86,7 @@ python detect.py --weights yolov5l.pt --source data/images/bus.jpg
 ## 📊 Recent Test Results
 
 ✅ Successfully detected:
+
 - **Image**: `data/images/bus.jpg`
 - **Objects Found**: 4 persons, 1 bus
 - **Inference Time**: 289.0ms
@@ -88,6 +95,7 @@ python detect.py --weights yolov5l.pt --source data/images/bus.jpg
 ## 🎯 Available Models
 
 The project includes:
+
 - **YOLOv5 models**: yolov5n, yolov5s, yolov5m, yolov5l, yolov5x
 - **YOLOv8 model**: yolov8n.pt (already downloaded)
 
@@ -112,11 +120,13 @@ yolov5/
 ## 🔧 Troubleshooting
 
 ### If webcam doesn't work:
+
 1. Make sure your webcam is connected
 2. Try changing source from `0` to `1` or `2`
 3. Check if another application is using the webcam
 
 ### If models don't download:
+
 Models are automatically downloaded on first use. Make sure you have internet connection.
 
 ## 📖 Additional Resources
