@@ -2,7 +2,7 @@
 # Optimized for cloud deployment
 
 # Core Flask
-Flask==3.1.0
+Flask==3.1.2
 Werkzeug==3.0.3
 
 # YOLOv5 Dependencies
