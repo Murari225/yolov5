@@ -11,6 +11,10 @@ import cv2
 from pathlib import Path
 import json
 from datetime import datetime
+import base64
+from io import BytesIO
+from PIL import Image
+import numpy as np
 
 app = Flask(__name__)
 
@@ -259,4 +263,6 @@ if __name__ == '__main__':
     print("\nPress Ctrl+C to stop the server")
     print("=" * 60)
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use PORT environment variable for deployment platforms
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
