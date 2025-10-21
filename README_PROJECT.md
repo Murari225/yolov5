@@ -12,6 +12,7 @@ A modern, feature-rich web application for real-time object detection using YOLO
 ### 🎯 Dual Detection Modes
 
 #### 📤 **Upload Mode**
+
 - Upload images (JPG, PNG, GIF, BMP)
 - Upload videos (MP4, AVI, MOV, MKV)
 - Drag & drop support
@@ -19,6 +20,7 @@ A modern, feature-rich web application for real-time object detection using YOLO
 - Download processed results
 
 #### 📹 **Live Camera Mode**
+
 - Real-time webcam detection
 - Multi-colored bounding boxes
 - Object numbering and confidence scores
@@ -27,6 +29,7 @@ A modern, feature-rich web application for real-time object detection using YOLO
 - Format: `object_name - number - (confidence)`
 
 ### 🎨 Premium UI/UX Design
+
 - **Modern dark theme** with cyan & pink gradients
 - **Glassmorphism effects** with backdrop blur
 - **Smooth animations** (floating icons, rotating borders, shimmer effects)
@@ -34,6 +37,7 @@ A modern, feature-rich web application for real-time object detection using YOLO
 - **Multi-colored detections** for better visibility
 
 ### 🔍 Detection Capabilities
+
 - **80+ object classes** (COCO dataset)
 - People, vehicles, animals, furniture, electronics, food, sports equipment
 - High accuracy with YOLOv5s model
@@ -50,7 +54,7 @@ cd yolov5-web-app
 
 # Create virtual environment (optional but recommended)
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -63,12 +67,14 @@ python app.py
 ```
 
 Then open your browser and navigate to:
+
 - **Upload Mode**: http://localhost:5000
 - **Live Camera**: http://localhost:5000/camera
 
 ## 📖 Usage
 
 ### Upload Mode
+
 1. Go to http://localhost:5000
 2. Drag & drop or click to select an image/video
 3. Wait for processing
@@ -76,6 +82,7 @@ Then open your browser and navigate to:
 5. Download processed file
 
 ### Live Camera Mode
+
 1. Go to http://localhost:5000/camera
 2. Click "🎥 Start Camera"
 3. Allow camera permissions
@@ -86,6 +93,7 @@ Then open your browser and navigate to:
 ## 🎨 Detection Visualization
 
 Live camera shows detections in this format:
+
 ```
 person - 1 - (0.98)
 person - 2 - (0.95)
@@ -93,6 +101,7 @@ car - 1 - (0.92)
 ```
 
 Each object type gets:
+
 - Unique color coding
 - Sequential numbering
 - Confidence score in parentheses
@@ -144,30 +153,38 @@ The system can detect 80+ object classes including:
 ## ⚙️ Configuration
 
 ### Change Detection Model
+
 Edit `app.py`:
+
 ```python
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+model = torch.hub.load("ultralytics/yolov5", "yolov5s", pretrained=True)
 # Options: yolov5n, yolov5s, yolov5m, yolov5l, yolov5x
 ```
 
 ### Adjust Confidence Threshold
+
 Edit `app.py`:
+
 ```python
 results = model(img_array, conf=0.5)  # Change 0.5 (0.0-1.0)
 ```
 
 ### Change Port
+
 Edit `app.py`:
+
 ```python
-app.run(debug=True, host='0.0.0.0', port=5000)  # Change port
+app.run(debug=True, host="0.0.0.0", port=5000)  # Change port
 ```
 
 ### Customize Colors
+
 Edit `static/style_premium.css`:
+
 ```css
 :root {
-    --primary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-    --secondary-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --primary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  --secondary-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 ```
 
@@ -189,17 +206,20 @@ Edit `static/style_premium.css`:
 ## 🔧 Troubleshooting
 
 ### Camera Not Working
+
 - Ensure camera permissions are granted
 - Check if another app is using the camera
 - Try different browser (Chrome recommended)
 - Change source from 0 to 1 or 2
 
 ### Model Not Loading
+
 - Ensure internet connection (downloads on first use)
 - Check disk space (~14MB needed)
 - Verify PyTorch installation
 
 ### Upload Fails
+
 - Check file size (max 100MB)
 - Verify file format is supported
 - Ensure sufficient disk space
