@@ -3,6 +3,7 @@
 ## ⚡ Super Fast Deployment (3 Steps)
 
 ### **Prerequisites:**
+
 1. Google Cloud account (free $300 credit)
 2. gcloud CLI installed
 
@@ -113,6 +114,7 @@ gcloud run services list
 ## 💰 Cost
 
 **Free Tier:**
+
 - 2 million requests/month
 - 360,000 GB-seconds
 - 180,000 vCPU-seconds
@@ -126,24 +128,28 @@ gcloud run services list
 ## 🔧 Configuration
 
 ### **Increase Memory**
+
 ```bash
 --memory 4Gi
 ```
 
 ### **Increase CPU**
+
 ```bash
 --cpu 4
 ```
 
 ### **Keep Warm (no cold starts)**
+
 ```bash
 --min-instances 1
 ```
 
 ### **Different Region**
+
 ```bash
---region europe-west1  # Belgium
---region asia-southeast1  # Singapore
+--region europe-west1    # Belgium
+--region asia-southeast1 # Singapore
 ```
 
 ---
@@ -166,18 +172,23 @@ gcloud run services list
 ## 🆘 Troubleshooting
 
 ### **"gcloud not found"**
+
 Install from: https://cloud.google.com/sdk/docs/install
 
 ### **"Billing not enabled"**
+
 Enable at: https://console.cloud.google.com/billing
 
 ### **"Build failed"**
+
 Check logs: `gcloud builds list`
 
 ### **"Service crashes"**
+
 Increase memory: `--memory 4Gi`
 
 ### **"Timeout errors"**
+
 Increase timeout: `--timeout 600`
 
 ---
@@ -197,11 +208,13 @@ Increase timeout: `--timeout 600`
 ## 🎉 After Deployment
 
 Your app will be live at:
+
 ```
 https://yolov5-webapp-xxxxxxxxxx-uc.a.run.app
 ```
 
 **Features:**
+
 - ✅ HTTPS enabled (required for camera)
 - ✅ Auto-scaling (0 to 10 instances)
 - ✅ Global CDN
