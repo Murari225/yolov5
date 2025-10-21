@@ -2,6 +2,9 @@
 
 A modern, feature-rich web application for real-time object detection using YOLOv5. Upload images/videos or use live camera detection with a beautiful, premium UI.
 
+## 🚀 Live Demo
+**Try it now:** [https://yolov5-detection.onrender.com](https://yolov5-detection.onrender.com)
+
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.7-red)
 ![Flask](https://img.shields.io/badge/Flask-3.1-green)
