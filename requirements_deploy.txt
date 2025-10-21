@@ -18,4 +18,4 @@ tqdm==4.66.3
 
 # Utilities
 gunicorn==22.0.0
-python-dotenv==1.0.1
+python-dotenv==1.1.1
