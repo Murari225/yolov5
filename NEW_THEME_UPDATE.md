@@ -5,9 +5,11 @@
 ### **1. New Color Scheme - Cyan & Pink Theme**
 
 **Old Colors (Purple):**
+
 - Primary: #667eea → #764ba2 (Purple to Violet)
 
 **New Colors (Cyan & Pink):**
+
 - **Primary**: #00f2fe → #4facfe (Cyan to Blue) 🔵
 - **Secondary**: #fa709a → #fee140 (Pink to Yellow) 🌸
 - **Success**: #0ba360 → #3cba92 (Green) 💚
@@ -16,18 +18,21 @@
 ### **2. Enhanced Live Camera Detection**
 
 **Bounding Boxes:**
+
 - ✅ **Multi-colored boxes** - 5 vibrant colors rotate
 - ✅ **Glowing effect** - Shadow blur for visibility
 - ✅ **Corner accents** - Stylish corner markers
 - ✅ **Thicker lines** - 4px width for better visibility
 
 **Labels:**
+
 - ✅ **Gradient backgrounds** - Color-matched to boxes
 - ✅ **Larger text** - Bold 18px font
 - ✅ **Better contrast** - White text with shadow
 - ✅ **Confidence scores** - Percentage displayed
 
 **Colors Used:**
+
 1. **Cyan** (#00f2fe) - Bright, tech-feel
 2. **Pink** (#fa709a) - Vibrant, eye-catching
 3. **Green** (#0ba360) - Natural, fresh
@@ -41,11 +46,13 @@
 ### **Live Camera Page**
 
 **Before:**
+
 - Simple purple boxes
 - Basic labels
 - Single color scheme
 
 **After:**
+
 - ✅ Multi-colored glowing boxes
 - ✅ Corner accent markers
 - ✅ Gradient label backgrounds
@@ -55,11 +62,13 @@
 ### **Overall Theme**
 
 **Background:**
+
 - Darker base (#0d1117)
 - Cyan, blue, and pink radial gradients
 - More modern, tech-focused
 
 **UI Elements:**
+
 - Cyan primary gradient
 - Pink/yellow secondary gradient
 - Green success indicators
@@ -70,6 +79,7 @@
 ## 🚀 How It Looks Now
 
 ### **Upload Page**
+
 ```
 ┌─────────────────────────────────────┐
 │  [Cyan Icon] YOLOv5 Detection       │  ← Cyan gradient
@@ -81,6 +91,7 @@
 ```
 
 ### **Live Camera**
+
 ```
 ┌─────────────────────────────────────┐
 │  📹 Live Camera Feed                │
@@ -102,18 +113,21 @@
 ## 🎨 Color Psychology
 
 ### **Cyan/Blue (#00f2fe)**
+
 - Technology, innovation
 - Trust, reliability
 - Modern, futuristic
 - AI and digital themes
 
 ### **Pink (#fa709a)**
+
 - Energy, creativity
 - Attention-grabbing
 - Friendly, approachable
 - Modern design trends
 
 ### **Green (#0ba360)**
+
 - Success, active status
 - Natural, positive
 - Go/ready indicators
@@ -152,18 +166,21 @@
 ## ✨ What Makes It Better
 
 ### **Visibility**
+
 - ✅ Multiple colors prevent confusion
 - ✅ Glowing boxes stand out
 - ✅ Corner accents add clarity
 - ✅ Larger, bolder text
 
 ### **Professional Look**
+
 - ✅ Gradient backgrounds
 - ✅ Modern color scheme
 - ✅ Smooth animations
 - ✅ Polished details
 
 ### **User Experience**
+
 - ✅ Easy to distinguish objects
 - ✅ Clear confidence scores
 - ✅ Attractive visual design
@@ -174,6 +191,7 @@
 ## 🔧 Technical Details
 
 ### **Canvas Drawing**
+
 ```javascript
 // Multi-colored boxes
 const colors = ['#00f2fe', '#fa709a', '#0ba360', '#fee140', '#f093fb'];
@@ -193,6 +211,7 @@ gradient.addColorStop(1, color + '99');
 ```
 
 ### **CSS Variables**
+
 ```css
 --primary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
 --secondary-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
@@ -232,6 +251,7 @@ gradient.addColorStop(1, color + '99');
 ## 🎨 Color Reference
 
 ### **Primary Palette**
+
 ```
 Cyan:    #00f2fe  ████
 Blue:    #4facfe  ████
@@ -242,6 +262,7 @@ Purple:  #f093fb  ████
 ```
 
 ### **Usage**
+
 - **Cyan/Blue**: Primary actions, main theme
 - **Pink**: Accents, secondary actions
 - **Green**: Success, active status
@@ -262,6 +283,7 @@ Purple:  #f093fb  ████
 ## 🎉 Result
 
 Your YOLOv5 app now has:
+
 - ✅ **Modern cyan & pink theme**
 - ✅ **Multi-colored live detections**
 - ✅ **Glowing bounding boxes**
