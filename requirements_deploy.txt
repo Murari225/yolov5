@@ -14,7 +14,7 @@ numpy==1.26.4
 PyYAML==6.0.1
 requests==2.32.2
 scipy==1.13.0
-tqdm==4.66.3
+tqdm==4.67.1
 
 # Utilities
 gunicorn==22.0.0
