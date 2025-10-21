@@ -88,6 +88,7 @@ gcloud builds submit --config cloudbuild.yaml
 ### **Step 4: Access Your Application**
 
 After deployment completes, you'll get a URL like:
+
 ```
 https://yolov5-webapp-xxxxxxxxxx-uc.a.run.app
 ```
@@ -133,27 +134,30 @@ Open this URL in your browser to access your app!
 
 ```bash
 # Choose closest region
---region us-central1      # Iowa, USA
---region us-east1         # South Carolina, USA
---region europe-west1     # Belgium
---region asia-southeast1  # Singapore
+--region us-central1     # Iowa, USA
+--region us-east1        # South Carolina, USA
+--region europe-west1    # Belgium
+--region asia-southeast1 # Singapore
 ```
 
 ## 💰 Cost Estimation
 
 **Free Tier (per month):**
+
 - 2 million requests
 - 360,000 GB-seconds
 - 180,000 vCPU-seconds
 - 1 GB network egress
 
 **Estimated Costs (after free tier):**
+
 - **2Gi memory, 2 CPU**: ~$0.00002400 per second
 - **Average request (5 seconds)**: ~$0.00012
 - **1000 requests/month**: ~$0.12
 - **10,000 requests/month**: ~$1.20
 
 **Tips to reduce costs:**
+
 - Set `--min-instances 0` (cold starts but cheaper)
 - Use smaller memory/CPU if possible
 - Set appropriate timeout values
@@ -320,6 +324,7 @@ gcloud run services delete yolov5-webapp --region us-central1
 ---
 
 **Need Help?** Check logs with:
+
 ```bash
 gcloud run services logs tail yolov5-webapp --region us-central1
 ```
