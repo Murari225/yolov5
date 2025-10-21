@@ -37,6 +37,7 @@ python app.py
 Navigate to: **http://localhost:5000**
 
 The server will start and you'll see:
+
 ```
 YOLOv5 Object Detection Web Application
 ========================================
@@ -59,12 +60,14 @@ Access the application at: http://localhost:5000
 ### Supported Formats
 
 **Images:**
+
 - JPG/JPEG
 - PNG
 - GIF
 - BMP
 
 **Videos:**
+
 - MP4
 - AVI
 - MOV
@@ -89,17 +92,21 @@ yolov5/
 ## 🎯 API Endpoints
 
 ### `GET /`
+
 Main application page
 
 ### `POST /upload`
+
 Upload and process file
 
 **Request:**
+
 - Method: POST
 - Content-Type: multipart/form-data
 - Body: file (image or video)
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -118,6 +125,7 @@ Upload and process file
 ```
 
 ### `GET /results/<filename>`
+
 Download processed result file
 
 ## ⚙️ Configuration
@@ -126,13 +134,13 @@ Edit `app.py` to customize:
 
 ```python
 # Maximum file size (default: 100MB)
-app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
+app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
 
 # Server host and port
-app.run(debug=True, host='0.0.0.0', port=5000)
+app.run(debug=True, host="0.0.0.0", port=5000)
 
 # Model selection (default: yolov5s)
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+model = torch.hub.load("ultralytics/yolov5", "yolov5s", pretrained=True)
 ```
 
 ### Available Models
@@ -151,9 +159,9 @@ Edit `static/style.css`:
 
 ```css
 :root {
-    --primary-color: #4F46E5;  /* Main color */
-    --primary-dark: #4338CA;   /* Hover color */
-    --success-color: #10B981;  /* Success messages */
+  --primary-color: #4f46e5; /* Main color */
+  --primary-dark: #4338ca; /* Hover color */
+  --success-color: #10b981; /* Success messages */
 }
 ```
 
@@ -171,19 +179,22 @@ results = model(image_path, conf=0.5)  # Change 0.5 to desired threshold
 ### Port Already in Use
 
 Change the port in `app.py`:
+
 ```python
-app.run(debug=True, host='0.0.0.0', port=5001)  # Use different port
+app.run(debug=True, host="0.0.0.0", port=5001)  # Use different port
 ```
 
 ### Model Not Loading
 
 The model downloads automatically on first run. Ensure:
+
 - Internet connection is active
 - Sufficient disk space (~14MB for yolov5s)
 
 ### Upload Fails
 
 Check:
+
 - File size is under 100MB
 - File format is supported
 - Sufficient disk space for processing
@@ -227,6 +238,7 @@ export FLASK_DEBUG=0
 ## 🔒 Security Notes
 
 For production deployment:
+
 - Set `debug=False` in `app.run()`
 - Add file validation and sanitization
 - Implement rate limiting
@@ -240,8 +252,8 @@ For production deployment:
 ```python
 import requests
 
-url = 'http://localhost:5000/upload'
-files = {'file': open('image.jpg', 'rb')}
+url = "http://localhost:5000/upload"
+files = {"file": open("image.jpg", "rb")}
 response = requests.post(url, files=files)
 result = response.json()
 
@@ -278,6 +290,7 @@ Add a webcam endpoint using WebRTC or streaming.
 ## 🆘 Support
 
 If you encounter issues:
+
 1. Check the console output for error messages
 2. Verify all dependencies are installed
 3. Ensure the model loaded successfully
