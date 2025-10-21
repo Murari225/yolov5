@@ -1,6 +1,7 @@
-from ultralytics import YOLO
-import cv2
 from datetime import datetime
+
+import cv2
+from ultralytics import YOLO
 
 # Load YOLOv8 model
 model = YOLO("yolov8n.pt")
